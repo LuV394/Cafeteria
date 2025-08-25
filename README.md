@@ -2,7 +2,7 @@
 Practica del curso HTML de Web.dev
 
 # Importante:
-Sitio web corresponde a un lugar ficticio, no existe ni tiene relacion con ningun lugar real, su direccion, telefono y correo electronico son invenciones que al momento de la publicacion de este repositorio no pertenecen a nadie 
+Sitio web corresponde a un lugar ficticio, no existe ni tiene relacion con ningun lugar real, su direccion, telefono y correo electronico son invenciones que al momento de la publicacion de este repositorio no pertenecen a mi ningún propietario físico o intelectual.
 
 # ☕ Cafetería Costarricense
 
