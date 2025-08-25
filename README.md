@@ -1,4 +1,4 @@
-# Cafeteria
+# Cafetería
 Practica del curso HTML de Web.dev
 
 # Importante:
