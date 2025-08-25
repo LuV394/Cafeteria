@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafetería Costarricense</title>
+    
+<style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f0e1;
+            color: #362c22;
+            line-height: 1.6;
+            padding-top: 120px; /* Espacio para el header fijo */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Encabezado Fijo */
+        header {
+            background-color: #362c22;
+            color: #f5f0e1;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: #f5f0e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: #c99c5d;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Secciones */
+        section {
+            padding: 40px 0;
+            display: none;
+        }
+        
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h1, h2, h3 {
+            color: #362c22;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #362c22;
+        }
+        
+        h2 {
+            font-size: 28px;
+            border-bottom: 2px solid #c99c5d;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        /* Inicio */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .coffee-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .coffee-type {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .coffee-type:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Menú */
+        .menu-container {
+            display: flex;
+            gap: 30px;
+        }
+        
+        aside {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 140px; /* Considerando el header fijo */
+            align-self: flex-start;
+        }
+        
+        aside h3 {
+            color: #c99c5d;
+            border-bottom: 1px solid #c99c5d;
+            padding-bottom: 10px;
+        }
+        
+        aside ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        aside ul li {
+            margin-bottom: 10px;
+        }
+        
+        aside ul li a {
+            color: #362c22;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 8px 10px;
+            border-radius: 4px;
+        }
+        
+        aside ul li a:hover {
+            color: #c99c5d;
+            background-color: #f5f0e1;
+        }
+        
+        .menu-content {
+            flex: 3;
+        }
+        
+        .menu-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #c99c5d;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-item h4 {
+            display: flex;
+            justify-content: space-between;
+            color: #362c22;
+        }
+        
+        .menu-item span {
+            color: #c99c5d;
+            font-weight: bold;
+        }
+        
+        /* Contacto */
+        .contact-info {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            color: #c99c5d;
+            margin-right: 10px;
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .map {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .map iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Pie de página */
+        footer {
+            background-color: #362c22;
+            color: #f5f0e1;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 100px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .menu-container {
+                flex-direction: column;
+            }
+            
+            aside {
+                position: relative;
+                top: 0;
+            }
+        }
+</style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Cafetería Costarricense</div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('inicio')">Inicio</a></li>
+                    <li><a href="#" onclick="showSection('menu')">Menú</a></li>
+                    <li><a href="#" onclick="showSection('contacto')">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+
+    <main class="container">
+        <!-- Seccion para el inicion-->
+         <section id="inicio" class="active">
+            <h1>Bienvenido a nuestra Cafeteria</h1>
+
+            <div clase="hero">
+                <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=400&q=80" alt="Cafetería">
+            </div>
+
+            <h2>Nuestra Historia</h2>
+            <p>Desde 2015, nuestra cafetería ha sido un lugar de encuentro para los amantes del buen <em>Café en Costa Rica</em>.Fundada por un grupo de amigos, comenzamos como un pequeño local familiar con la misión de servir el mejor <strong>café</strong> Costarrincense acompañado de deliciosos postres caseros</p>
+            <p>Hoy, después de una decada, mantenemos la misma pasión por el <strong>Café</strong> de calidad y el servicio cercano que nos caracteriza. Nuestros granos seleccionados cuidadosamente de las zonas de Tarrazú y Naranjo, granos con caracteriscos sabores</p>
+
+            <h2>Tipos de <strong>Café</strong> de Costa Rica</h2>
+            <div class="coffee-types">
+                <div class="coffee-type">
+                    <h3>Tarrazú</h3>
+                    <p>Considerado uno de los mejores cafés del mundo, el Tarrazú se cultiva en las montañas de la región homónima. Tiene un sabor intenso, cuerpo completo y un aroma que recuerda a chocolate y frutos secos.</p>
+                </div>
+                <div class="coffee-type">
+                    <h3>Valle Central</h3>
+                    <p>Este café se caracteriza por su acidez media, cuerpo medio y un sabor bien balanceado con notas a nueces y chocolate. Es perfecto para quienes prefieren un café suave pero con carácter.</p>
+                </div>
+                <div class="coffee-type">
+                    <h3>Naranjo</h3>
+                    <p>Posee un sabor característico de la zona con notas cítricas y achocolatadas que le dan un sabor exquisito, además de un excelente balance entre cuerpo, aroma y acidez..</p>
+                </div>
+            </div>
+         </section>
+
+         <!-- Zona en la colocamos el Menú-->
+        <section id="menu">
+            <h1>Nuestro Menú</h1>
+            
+            <div class="menu-container">
+                <aside>
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="#cafes">Cafés</a></li>
+                        <li><a href="#postres">Postres</a></li>
+                        <li><a href="#reposteria">Repostería Salada</a></li>
+                        <li><a href="#sandwiches">Sandwiches</a></li>
+                    </ul>
+                </aside>
+                
+                <div class="menu-content">
+                    <div id="cafes" class="menu-section">
+                        <h2>Cafés</h2>
+                        
+                        <div class="menu-item">
+                            <h4>Café Negro <span>₡1,500</span></h4>
+                            <p>Nuestro café negro de grano 100% costarricense, servido en taza mediana o grande.</p>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <h4>Latte <span>₡2,200</span></h4>
+                            <p>Espresso suave con leche vaporizada y una ligera capa de espuma.</p>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <h4>Capuchino <span>₡2,100</span></h4>
+                            <p>La clásica preparación con partes iguales de espresso, leche vaporizada y espuma.</p>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <h4>Mokachino <span>₡2,500</span></h4>
+                            <p>Deliciosa combinación de espresso, leche vaporizada y chocolate.</p>
+                        </div>
+                    </div>
+
+            <div id="postres" class="menu-section">
+                <h2>Postres</h2>
+
+                <div class="menu-item">
+                    <h4>Pastel de Chocolate <span>₡2,800</span></h4>
+                    <p>Torta de chocolate intenso con relleno cremoso y cobertura de granache</p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Queque de Zanahoria <span>₡2,500</span></h4>
+                    <p>Esponjoso queque de zanahoria con nuez y cubierto con glaze de queso crema.</p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Red Velvet <span>₡2,900</span></h4>
+                    <p>Clásico bizcocho de color rojo con sabor a chocolate  suave y frosting de queso crema.</p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Canasta de Fresa <span>₡2,200</span></h4>
+                    <p>Masa dulce rellena de fresas frescas con crema pastelera</p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Prusianos <span>₡1,800</span></h4>
+                    <p>Hojaldre relleno de crema dulce, espolvoreado con azúcar glass</p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Flautas <span>₡2,000</span></h4>
+                    <p>Hojaldre enrollado relleno de manjar o chocolate</p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Pie de Manzana <span>₡2,600</span></h4>
+                    <p>Clásico pie de manzana con canela, servido caliente con una bola de helado.</p>
+                </div>            
+            </div>
+
+            <div id="reposteria" class="menu-section">
+                <h2>Repostería Salada</h2>
+
+                <div class="menu-item">
+                    <h4>Empanada de Pollo <span>₡1,800</span></h4>
+                    <p>Masa de maíz rellena de pollo desmenuzado en una salsa de vegetales</p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Enchilada <span>₡1,500</span></h4>
+                    <p>Hojaldre rrelleno de picadillo de papa y carne en una salsa de vegetales picante.</p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Palitos de Queso <span>₡1,500</span></h4>
+                    <p>Palitos de hojaldre rellenos de queso mozzarella fundido, servidos con salsa de tomaste. </p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Croissant <span>₡1,600</span> </h4>
+                    <p>roissant de hojaldre dorado, disponible sencillo o relleno de jamon y queso.</p>
+                </div>
+            </div>
+
+            <div id="sandwiches" class="menu-section">
+
+                <div class="menu-item">
+                    <h4>Sandwich de Carne <span>₡3,200</span></h4>
+                    <p>Pan artesanal con carne mechada, lechuga, tomate, cebolla y salsa especial de la casa</p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Sandwich de Pollo <span>₡3,000</span></h4>
+                    <p>Pan artesanal con pechuga de pollo a la plancha, aguacate, lechuga y mayonesa de la casa. </p>
+                </div>
+
+                <div class="menu-item">
+                    <h4>Sandwich de Jamon y Queso <span>₡2,800</span></h4>
+                    <p>Clásico sandwich de jamon y queso suizo, mostaza y matequilla.</p>
+                </div>
+            </div>          
+
+        </section>
+        
+          <!-- Zona del contacto-->
+           <section id="contacto">
+            <h1>Contato</h1>
+
+            <div class="contact-info">
+                <h2>Visítanos</h2>
+                <p><i></i>Avenida Central, Calle 5, San José, Costa Rica</p>
+                <p><i></i>+506 2222-1363</p>
+                <p><i></i>info@cafeteriacostarricense.com</p>
+                <p><i></i>Horario: Lunes a Sábado de 7:00 am a 6:00 pm, Domingos Cerrado</p>
+            </div>
+
+            <div class="map">
+                <h2>Encuéntranos</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.982525547859!2d-84.077432924226!3d9.935290073178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e3aa66f7a0a7%3A0x5e0464e2908a245e!2sSan%20Jos%C3%A9%2C%20Costa%20Rica!5e0!3m2!1ses!2sus!4v1690912345678!5m2!1ses!2sus" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+    </main>
+
+      
+
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Cafetería Costarrincense & V394 - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // Función para mostrar la sección seleccionada y ocultar las demás
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll suave hacia arriba
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    
+</body>
+</html>
